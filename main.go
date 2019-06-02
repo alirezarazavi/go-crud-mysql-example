@@ -54,7 +54,28 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 }
 
+// Show single item
 func Show(w http.ResponseWriter, r *http.Request) {
+	db := dbConnect()
+	nID := r.URL.Query().Get("id")
+	rows, err := db.Query("SELECT * FROM Employee WHERE id = ?", nID)
+	if err != nil {
+		panic(err.Error())
+	}
+	emp := Employee{}
+	for rows.Next() {
+		var id int
+		var name, city string
+		err = rows.Scan(&id, &name, &city)
+		if err != nil {
+			panic(err.Error())
+		}
+		emp.Id = id
+		emp.Name = name
+		emp.City = city
+	}
+	tmpl.ExecuteTemplate(w, "Show", emp)
+	defer db.Close()
 }
 
 func New(w http.ResponseWriter, r *http.Request) {
