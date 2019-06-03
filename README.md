@@ -5,7 +5,6 @@ Go CRUD MySQL Example
 ```
 1. Download this Project
 2. Go to root of project
-3. Build: go build
-4. Run: ./mysql
-5. Go to http://localhost:8000/mysql
+3. Build & Run: go run main.go
+4. Go to http://localhost:8080
 ```

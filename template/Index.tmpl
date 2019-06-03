@@ -16,12 +16,12 @@
             <tbody>
                 {{ range . }}
                     <tr>
-                        <td>{{ .Id }}</td>
+                        <td>{{ .ID }}</td>
                         <td>{{ .Name }}</td>
                         <td>{{ .City }}</td>
-                        <td><a href="/show?id={{ .Id }}">View</a></td>
-                        <td><a href="/edit?id={{ .Id }}">Edit</a></td>
-                        <td><a href="/delete?id={{ .Id }}">Delete</a></td>
+                        <td><a href="/show?id={{ .ID }}">View</a></td>
+                        <td><a href="/edit?id={{ .ID }}">Edit</a></td>
+                        <td><a href="/delete?id={{ .ID }}">Delete</a></td>
                     </tr>
                 {{ end }}
             </tbody>
