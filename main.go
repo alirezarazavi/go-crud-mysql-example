@@ -16,6 +16,7 @@ type Employee struct {
 	City string
 }
 
+// Open Connection with MySQL Driver
 func dbConnect() (db *sql.DB) {
 	dbDriver := "mysql"
 	dbUser := "root"
@@ -28,6 +29,7 @@ func dbConnect() (db *sql.DB) {
 	return db
 }
 
+// Read All Templates on folder template
 var tmpl = template.Must(template.ParseGlob("template/*"))
 
 // Index Page
@@ -79,7 +81,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 }
 
-// Show Item
+// Show New Page
 func New(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "New", nil)
 }
@@ -159,12 +161,14 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	log.Println("Server started on: http://localhost:8080")
+	// Routes
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/show", Show)
 	http.HandleFunc("/new", New)
 	http.HandleFunc("/edit", Edit)
 	http.HandleFunc("/insert", Insert)
-	http.HandleFunc("/Update", Update)
-	http.HandleFunc("/Delete", Delete)
+	http.HandleFunc("/update", Update)
+	http.HandleFunc("/delete", Delete)
+	// Start server on port 8080
 	http.ListenAndServe(":8080", nil)
 }
